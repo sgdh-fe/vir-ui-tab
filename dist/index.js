@@ -1,6 +1,6 @@
 
 /*!
- * vir-ui-tab v1.0.0
+ * vir-ui-tab v1.1.0
  * (c) 2017 cjg
  * Released under the MIT License.
  */
@@ -32,8 +32,7 @@ var index = function () {
 
   return Vir({
     data: {
-      index: index,
-      lock: false
+      index: 0
     },
     events: function () {
       if (eventType == 'click') {
@@ -47,13 +46,6 @@ var index = function () {
         return _ref2 = {}, _ref2['mouseenter->' + navSelector] = 'enterHandler', _ref2['mouseleave->' + navSelector] = 'leaveHandler', _ref2;
       }
     }(),
-    validate: {
-      index: function index() {
-        if (this.get('lock')) {
-          return false;
-        }
-      }
-    },
     watch: {
       index: function index(result) {
         var old = result.old;

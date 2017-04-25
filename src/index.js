@@ -13,8 +13,7 @@ export default function (options = {}) {
 
   return Vir({
     data: {
-      index: index,
-      lock: false
+      index: 0
     },
     events: function () {
       if (eventType == 'click') {
@@ -29,13 +28,6 @@ export default function (options = {}) {
         }
       }
     }(),
-    validate: {
-      index() {
-        if (this.get('lock')) {
-          return false
-        }
-      }
-    },
     watch: {
       index(result) {
         let old = result.old
