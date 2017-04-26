@@ -13,7 +13,8 @@ export default function (options = {}) {
 
   return Vir({
     data: {
-      index: 0
+      index: 0,
+      state: {}
     },
     events: function () {
       if (eventType == 'click') {
@@ -52,10 +53,15 @@ export default function (options = {}) {
       },
       leaveHandler() {
         clearTimeout(this.get('timeout'))
+      },
+      getState(index) {
+        let state = this.get('state')
+        if (state[index]) {
+          return true
+        }
+        state[index] = true
+        this.set('state', state)
       }
-    },
-    init() {
-      this.set('index', index)
     }
   })
 }

@@ -31,23 +31,30 @@ npm install vir-ui-tab
 ## 基本使用
 
 ```js
-const Tab = require('vir-ui-tab')({
-  index : 0,
-  eventType : 'click',
-  navSelector : 'ol > li',
-  containerSelector : 'ul > li',
-  navCurrentClass : 'cur',
-  containerCurrentClass : 'cur'
-})
+const Tab = require('vir-ui-tab')(
+/* 默认值
+  {
+    index : 0,
+    eventType : 'click', // click or mouseover
+    navSelector : 'ol > li',
+    containerSelector : 'ul > li',
+    navCurrentClass : 'cur',
+    containerCurrentClass : 'cur'
+  }
+*/
+)
 
 let tab = new Tab({
   el: '.tab'
 })
+
+console.log(tab.getState(3)) // 查看 第 n 个 slide 是否初始化
+
 /*
-手动初始化
-tab.set('index',0 {
-  force: true
-})
+  手动初始化
+  tab.set('index',0 {
+    force: true
+  })
 */
 ```
 
