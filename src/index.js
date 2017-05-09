@@ -37,6 +37,15 @@ export default function (options = {}) {
         this.$$(containerSelector).eq(old).removeClass(containerCurrentClass)
         this.$$(navSelector).eq(index).addClass(navCurrentClass)
         this.$$(containerSelector).eq(index).addClass(containerCurrentClass)
+
+        // 更新是否初始化的状态
+        let state = this.get('state')
+        if (state[index]) {
+          return
+        }
+        state = Object.assign({}, state)
+        state[index] = true
+        this.set('state', state)
       }
     },
     methods: {
@@ -53,14 +62,6 @@ export default function (options = {}) {
       },
       leaveHandler() {
         clearTimeout(this.get('timeout'))
-      },
-      getState(index) {
-        let state = this.get('state')
-        if (state[index]) {
-          return true
-        }
-        state[index] = true
-        this.set('state', state)
       }
     }
   })

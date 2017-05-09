@@ -1,6 +1,6 @@
 
 /*!
- * vir-ui-tab v1.2.0
+ * vir-ui-tab v1.3.0
  * (c) 2017 cjg
  * Released under the MIT License.
  */
@@ -13,6 +13,20 @@
 
 Vir = 'default' in Vir ? Vir['default'] : Vir;
 $ = 'default' in $ ? $['default'] : $;
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
 
 var index = function () {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -55,6 +69,15 @@ var index = function () {
         this.$$(containerSelector).eq(old).removeClass(containerCurrentClass);
         this.$$(navSelector).eq(index).addClass(navCurrentClass);
         this.$$(containerSelector).eq(index).addClass(containerCurrentClass);
+
+        // 更新是否初始化的状态
+        var state = this.get('state');
+        if (state[index]) {
+          return;
+        }
+        state = _extends({}, state);
+        state[index] = true;
+        this.set('state', state);
       }
     },
     methods: {
@@ -73,14 +96,6 @@ var index = function () {
       },
       leaveHandler: function leaveHandler() {
         clearTimeout(this.get('timeout'));
-      },
-      getState: function getState(index) {
-        var state = this.get('state');
-        if (state[index]) {
-          return true;
-        }
-        state[index] = true;
-        this.set('state', state);
       }
     }
   });
