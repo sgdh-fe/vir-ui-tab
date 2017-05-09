@@ -44,15 +44,24 @@ const Tab = require('vir-ui-tab')(
 */
 )
 
-let tab = new Tab({
+var tab = new Tab({
   el: '.tab'
 })
+tab.$watch('state', function (result) {
+  var index = result.value
+  console.log('初始化完成', this.get('index'))
+})
 
-console.log(tab.getState(3)) // 查看 第 n 个 slide 是否初始化
+tab.$watch('index', function (result) {
+  var index = result.value
+  this.$$('ul > li').eq(index).html(index)
+})
+
+
 
 /*
-  手动初始化
-  tab.set('index',0 {
+  手动初始化首屏
+  tab.set('index', 0, {
     force: true
   })
 */
